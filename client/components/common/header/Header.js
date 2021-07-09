@@ -74,7 +74,7 @@ class Header extends Component {
               noWrap
               className={classes.title}
             >
-              תיקופון
+              דיווח התעמלות
             </Typography>
             <Button onClick={this.logOut.bind(this)}>התנתק</Button>
           </Toolbar>

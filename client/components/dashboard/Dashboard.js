@@ -10,7 +10,6 @@ import SummaryBox from './SummaryBox';
 const statItems = [
   { id: 'reports', text: 'צפיות', icon: ListAltIcon, color: pink[600], value: 0 },
   { id: 'students', text: 'תלמידות', icon: PeopleIcon, color: cyan[600], value: 0 },
-  { id: 'teachers', text: 'מורות', icon: SupervisedUserCircleIcon, color: purple[600], value: 0 },
 ];
 
 const Dashboard = ({ stats }) => {

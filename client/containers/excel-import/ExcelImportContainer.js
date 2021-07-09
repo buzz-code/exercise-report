@@ -11,7 +11,6 @@ const supportedEntities = [
     title: titles.STUDENTS,
     columns: ['tz', 'name', 'phone_number', 'klass', 'group'],
   },
-  { value: entities.TEACHERS, title: titles.TEACHERS, columns: ['tz', 'name', 'full_phone'] },
 ];
 
 const ExcelImportContainer = () => {

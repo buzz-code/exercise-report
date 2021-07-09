@@ -1,6 +1,5 @@
 import Report from '../models/report.model';
 import Student from '../models/student.model';
-import Teacher from '../models/teacher.model';
 
 /**
  * Get stats
@@ -10,14 +9,13 @@ import Teacher from '../models/teacher.model';
  * @returns {*}
  */
 export async function getStats(req, res) {
-    const [reports, students, teachers] = await Promise.all([
+    const [reports, students] = await Promise.all([
         getCountFromTable(Report, req.currentUser.id),
         getCountFromTable(Student, req.currentUser.id),
-        getCountFromTable(Teacher, req.currentUser.id),
     ]);
     res.json({
         error: null,
-        data: { reports, students, teachers }
+        data: { reports, students }
     });
 }
 

@@ -2,8 +2,7 @@ import { CallBase } from "./callBase";
 import format from 'string-format';
 import * as queryHelper from './queryHelper';
 import Report from "../models/report.model";
-import ReportTeacher from "../models/reportTeacher.model";
-
+//todo: fix this
 export class YemotCall extends CallBase {
     constructor(params, callId, user) {
         super(params, callId, user);

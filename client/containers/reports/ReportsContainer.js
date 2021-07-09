@@ -10,8 +10,6 @@ const getColumns = (lookups) => [
   { field: 'enter_hour', title: 'שעת כניסה' },
   { field: 'exit_hour', title: 'שעת יציאה' },
   { field: 'report_date', title: 'תאריך הדיווח', type: 'date' },
-  { field: 'teacher_id', title: 'מורה', lookup: lookups.teachers },
-  { field: 'teacher_full_phone', title: 'טלפון מורה' },
   { field: 'lesson_number', title: 'מספר שיעור' },
   { field: 'other_students', title: 'תלמידות נוספות' },
   { field: 'report_type_id', title: 'סוג דיווח', lookup: lookups.reportTypes },
@@ -22,8 +20,6 @@ const getFilters = () => [
   { field: 'enter_hour', label: 'שעת כניסה', type: 'text', operator: 'like' },
   { field: 'exit_hour', label: 'שעת יציאה', type: 'text', operator: 'like' },
   { field: 'report_date', label: 'תאריך הדיווח', type: 'date', operator: 'date-eq' },
-  { field: 'teachers.name', label: 'מורה', type: 'text', operator: 'like' },
-  { field: 'teacher_full_phone', label: 'טלפון מורה', type: 'text', operator: 'like' },
   { field: 'lesson_number', label: 'מספר שיעור', type: 'text', operator: 'like' },
   { field: 'report_types.name', label: 'סוג דיווח', type: 'text', operator: 'like' },
 ];
@@ -44,8 +40,6 @@ const ReportsContainer = ({ entity, title }) => {
   const editDataLists = useMemo(
     () => ({
       students: getEditLookup(editData && editData.students),
-      teachers: { ...getEditLookup(editData && editData.teachers), null: 'לא נבחר' },
-      reportTypes: getEditLookup(editData && editData.reportTypes),
     }),
     [editData]
   );
@@ -58,7 +52,6 @@ const ReportsContainer = ({ entity, title }) => {
       dataToSave.report_date instanceof Date
         ? dataToSave.report_date.toISOString().substr(0, 10)
         : dataToSave.report_date.substr(0, 10),
-    teacher_id: dataToSave.teacher_id === 'null' ? null : dataToSave.teacher_id,
     student_group: undefined,
   });
 

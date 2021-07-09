@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'listen-report',
+      name: 'exercise-report',
       script: './index.js',
       watch: false,
       env: {
