@@ -10,9 +10,10 @@ const getColumns = (lookups) => [
   { field: 'enter_hour', title: 'שעת כניסה' },
   { field: 'exit_hour', title: 'שעת יציאה' },
   { field: 'report_date', title: 'תאריך הדיווח', type: 'date' },
-  { field: 'lesson_number', title: 'מספר שיעור' },
-  { field: 'other_students', title: 'תלמידות נוספות' },
-  { field: 'report_type_id', title: 'סוג דיווח', lookup: lookups.reportTypes },
+  { field: 'is_aerobic', title: 'אימון אירובי' },
+  { field: 'is_hands', title: 'שרירי ידים' },
+  { field: 'is_legs', title: 'שרירי רגלים' },
+  { field: 'is_flexibility', title: 'גמישות' },
 ];
 const getFilters = () => [
   { field: 'students.name', label: 'תלמידה', type: 'text', operator: 'like' },
@@ -20,8 +21,6 @@ const getFilters = () => [
   { field: 'enter_hour', label: 'שעת כניסה', type: 'text', operator: 'like' },
   { field: 'exit_hour', label: 'שעת יציאה', type: 'text', operator: 'like' },
   { field: 'report_date', label: 'תאריך הדיווח', type: 'date', operator: 'date-eq' },
-  { field: 'lesson_number', label: 'מספר שיעור', type: 'text', operator: 'like' },
-  { field: 'report_types.name', label: 'סוג דיווח', type: 'text', operator: 'like' },
 ];
 
 const getEditLookup = (data) =>
