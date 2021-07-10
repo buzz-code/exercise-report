@@ -10,10 +10,10 @@ const getColumns = (lookups) => [
   { field: 'enter_hour', title: 'שעת כניסה' },
   { field: 'exit_hour', title: 'שעת יציאה' },
   { field: 'report_date', title: 'תאריך הדיווח', type: 'date' },
-  { field: 'is_aerobic', title: 'אימון אירובי' },
-  { field: 'is_hands', title: 'שרירי ידים' },
-  { field: 'is_legs', title: 'שרירי רגלים' },
-  { field: 'is_flexibility', title: 'גמישות' },
+  { field: 'is_aerobic', title: 'אימון אירובי', type: 'boolean' },
+  { field: 'is_hands', title: 'שרירי ידים', type: 'boolean' },
+  { field: 'is_legs', title: 'שרירי רגלים', type: 'boolean' },
+  { field: 'is_flexibility', title: 'גמישות', type: 'boolean' },
 ];
 const getFilters = () => [
   { field: 'students.name', label: 'תלמידה', type: 'text', operator: 'like' },
