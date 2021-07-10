@@ -43,7 +43,8 @@ var config = {
             'react-dom': '@hot-loader/react-dom'
         }
     },
-    devtool: "hidden-source-map"
+    devtool: "hidden-source-map",
+    stats: 'verbose',
 };
 
 module.exports = config;
