@@ -11,7 +11,7 @@ import PACKAGE from '../package.json';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../webpack/webpack.config.dev';
+import webpackConfig from '../common-modules/webpack/webpack.config.dev';
 
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
