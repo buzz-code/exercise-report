@@ -1,6 +1,7 @@
 {
   "name": "exercise-report",
   "displayName": "דיווח התעמלות",
+  "customDomain": false,
   "version": "1.0.0",
   "description": "MySQL, Express, React/Redux Boilerplate Application",
   "scripts": {
