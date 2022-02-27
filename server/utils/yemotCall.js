@@ -2,6 +2,7 @@ import { CallBase } from "../../common-modules/server/utils/callBase";
 import format from 'string-format';
 import * as queryHelper from './queryHelper';
 import Report from "../models/report.model";
+import MusicReport from "../models/music-report.model";
 
 export class YemotCall extends CallBase {
     constructor(params, callId, user) {
@@ -31,15 +32,7 @@ export class YemotCall extends CallBase {
         }
     }
 
-    async handleStudentCall(student) {
-        await this.send(
-            this.read({ type: 'text', text: format(this.texts.welcomeAndTypeEnterHour, student.name) },
-                'enterHour', 'tap', { max: 4, min: 4, block_asterisk: true })
-        );
-        await this.send(
-            this.read({ type: 'text', text: this.texts.typeExitHour },
-                'exitHour', 'tap', { max: 4, min: 4, block_asterisk: true })
-        );
+    async handleExercise() {
         await this.send(
             this.read({ type: 'text', text: this.texts.typeIsAerobic + ', ' + this.texts.typeOneForPositiveZeroForNegative },
                 'isAerobic', 'tap', { max: 1, min: 1, block_asterisk: true })
@@ -56,18 +49,52 @@ export class YemotCall extends CallBase {
             this.read({ type: 'text', text: this.texts.typeIsFlexibility + ', ' + this.texts.typeOneForPositiveZeroForNegative },
                 'isFlexibility', 'tap', { max: 1, min: 1, block_asterisk: true })
         );
+
+        await new Report({
+            user_id: this.user.id,
+            student_id: student.id,
+            enter_hour: this.params.enterHour,
+            exit_hour: this.params.exitHour,
+            report_date: new Date().toISOString().substr(0, 10),
+            is_aerobic: this.params.isAerobic == 1,
+            is_hands: this.params.isHands == 1,
+            is_legs: this.params.isLegs == 1,
+            is_flexibility: this.params.isFlexibility == 1,
+        }).save();
+    }
+
+    async handleMusic() {
+        await this.send(
+            this.read({ type: 'text', text: this.texts.typeExerciseType },
+                'exerciseType', 'tap', { max: 1, min: 1, block_asterisk: true })
+        );
+
+        await new MusicReport({
+            user_id: this.user.id,
+            student_id: student.id,
+            enter_hour: this.params.enterHour,
+            exit_hour: this.params.exitHour,
+            report_date: new Date().toISOString().substr(0, 10),
+            exercise_type: this.params.exerciseType,
+        }).save();
+
+    }
+
+    async handleStudentCall(student) {
+        await this.send(
+            this.read({ type: 'text', text: format(this.texts.welcomeAndTypeEnterHour, student.name) },
+                'enterHour', 'tap', { max: 4, min: 4, block_asterisk: true })
+        );
+        await this.send(
+            this.read({ type: 'text', text: this.texts.typeExitHour },
+                'exitHour', 'tap', { max: 4, min: 4, block_asterisk: true })
+        );
         try {
-            await new Report({
-                user_id: this.user.id,
-                student_id: student.id,
-                enter_hour: this.params.enterHour,
-                exit_hour: this.params.exitHour,
-                report_date: new Date().toISOString().substr(0, 10),
-                is_aerobic: this.params.isAerobic == 1,
-                is_hands: this.params.isHands == 1,
-                is_legs: this.params.isLegs == 1,
-                is_flexibility: this.params.isFlexibility == 1,
-            }).save();
+            if (student.student_type == 1) {
+                await this.handleExercise();
+            } else if (student.student_type == 2) {
+                await this.handleMusic();
+            }
 
             await this.send(
                 this.id_list_message({ type: 'text', text: this.texts.recordWasSavedSuccessfully }),

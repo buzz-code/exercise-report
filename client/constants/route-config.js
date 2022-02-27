@@ -9,6 +9,7 @@ import * as titles from './entity-title';
 
 import Dashboard from '../containers/dashboard/DashboardContainer';
 import Reports from '../containers/reports/ReportsContainer';
+import MusicReports from '../containers/music-reports/MusicReportsContainer';
 import Students from '../containers/students/StudentsContainer';
 import Texts from '../containers/texts/TextsContainer';
 import ExcelImport from '../containers/excel-import/ExcelImportContainer';
@@ -28,6 +29,13 @@ export default [
       icon: ListAltIcon,
       title: titles.REPORTS,
       props: { entity: entities.REPORTS, title: titles.REPORTS },
+    },
+    {
+      path: '/music-reports',
+      component: MusicReports,
+      icon: ListAltIcon,
+      title: titles.MUSIC_REPORTS,
+      props: { entity: entities.MUSIC_REPORTS, title: titles.MUSIC_REPORTS },
     },
     {
       path: '/students',

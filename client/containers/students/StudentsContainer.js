@@ -8,6 +8,7 @@ const getColumns = () => [
   { field: 'phone_number', title: 'מספר טלפון' },
   { field: 'klass', title: 'כיתה' },
   { field: 'group', title: 'התמחות' },
+  { field: 'student_type', title: 'סוג תלמידה' },
 ];
 const getFilters = () => [
   { field: 'tz', label: 'תעודת זהות', type: 'text', operator: 'like' },
@@ -15,6 +16,7 @@ const getFilters = () => [
   { field: 'phone_number', label: 'מספר טלפון', type: 'text', operator: 'like' },
   { field: 'klass', label: 'כיתה', type: 'text', operator: 'like' },
   { field: 'group', label: 'התמחות', type: 'text', operator: 'like' },
+  { field: 'student_type', label: 'סוג תלמידה', type: 'text', operator: 'like' },
 ];
 
 const StudentsContainer = ({ entity, title }) => {
