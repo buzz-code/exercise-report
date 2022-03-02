@@ -65,8 +65,20 @@ export class YemotCall extends CallBase {
 
     async handleMusic() {
         await this.send(
-            this.read({ type: 'text', text: this.texts.typeExerciseType },
-                'exerciseType', 'tap', { max: 1, min: 1, block_asterisk: true })
+            this.read({ type: 'text', text: this.texts.typeHalilit + ', ' + this.texts.typeOneForPositiveZeroForNegative },
+                'halilit', 'tap', { max: 1, min: 1, block_asterisk: true })
+        );
+        await this.send(
+            this.read({ type: 'text', text: this.texts.typeAnother + ', ' + this.texts.typeOneForPositiveZeroForNegative },
+                'another', 'tap', { max: 1, min: 1, block_asterisk: true })
+        );
+        await this.send(
+            this.read({ type: 'text', text: this.texts.typeCuebase + ', ' + this.texts.typeOneForPositiveZeroForNegative },
+                'cuebase', 'tap', { max: 1, min: 1, block_asterisk: true })
+        );
+        await this.send(
+            this.read({ type: 'text', text: this.texts.typeNotes + ', ' + this.texts.typeOneForPositiveZeroForNegative },
+                'notes', 'tap', { max: 1, min: 1, block_asterisk: true })
         );
 
         await new MusicReport({
@@ -75,7 +87,10 @@ export class YemotCall extends CallBase {
             enter_hour: this.params.enterHour,
             exit_hour: this.params.exitHour,
             report_date: new Date().toISOString().substr(0, 10),
-            exercise_type: this.params.exerciseType,
+            halilit: this.params.halilit,
+            another: this.params.another,
+            cuebase: this.params.cuebase,
+            notes: this.params.notes,
         }).save();
 
     }

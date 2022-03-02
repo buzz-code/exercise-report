@@ -16,7 +16,10 @@ const getColumns = ({ students }) => [
   { field: 'enter_hour', title: 'שעת כניסה' },
   { field: 'exit_hour', title: 'שעת יציאה' },
   { field: 'report_date', title: 'תאריך הדיווח', type: 'date' },
-  { field: 'exercise_type', title: 'סוג האימון', type: 'numeric' },
+  { field: 'halilit', title: 'חלילית', type: 'boolean' },
+  { field: 'another', title: 'כלי נוסף', type: 'boolean' },
+  { field: 'cuebase', title: 'תוכנת קיובייס', type: 'boolean' },
+  { field: 'notes', title: 'הקלדת תווים', type: 'boolean' },
 ];
 const getFilters = () => [
   { field: 'students.name', label: 'תלמידה', type: 'text', operator: 'like' },
