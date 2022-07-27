@@ -9,21 +9,6 @@ export class YemotCall extends CallBase {
         super(params, callId, user);
     }
 
-    send(message) {
-        try {
-            if (!this.res)
-                throw 'no res found';
-
-            console.log('arg', arguments)
-            const messages = Array.prototype.filter.call(arguments, item => item);
-            console.log('message', messages)
-            this.res.send(Array.prototype.join.call(messages, '&'));
-            return this.waitForResponse();
-        } catch (e) {
-            console.log('error in yemot send', e)
-        }
-    }
-
     async start() {
         await this.getTexts();
         try {
