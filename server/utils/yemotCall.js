@@ -101,6 +101,7 @@ export class YemotCall extends CallBase {
 
     async handleStudentCall(student) {
         console.log('start student')
+        console.log('2', this.texts, student)
         await this.send(
             this.read({ type: 'text', text: format(this.texts.welcomeAndTypeEnterHour, student.name) },
                 'enterHour', 'tap', { max: 4, min: 4, block_asterisk: true })
