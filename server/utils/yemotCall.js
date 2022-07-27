@@ -9,13 +9,25 @@ export class YemotCall extends CallBase {
         super(params, callId, user);
     }
 
+    send(message) {
+        try {
+            if (!this.res)
+                throw 'no res found';
+
+            console.log('arg', arguments)
+            const messages = Array.prototype.filter.call(arguments, item => item);
+            console.log('message', messages)
+            this.res.send(Array.prototype.join.call(messages, '&'));
+            return this.waitForResponse();
+        } catch (e) {
+            console.log('error in yemot send', e)
+        }
+    }
+
     async start() {
-        console.log('start')
         await this.getTexts();
-        console.log('got texts')
         try {
             const student = await queryHelper.getStudentByUserIdAndPhone(this.user.id, this.params.ApiPhone);
-            console.log('student', student)
             if (student) {
                 await this.handleStudentCall(student);
             }
@@ -27,7 +39,6 @@ export class YemotCall extends CallBase {
             }
         }
         catch (e) {
-            console.log('in catch')
             if (e) {
                 console.log('catch yemot exception', e);
             }
@@ -100,22 +111,14 @@ export class YemotCall extends CallBase {
     }
 
     async handleStudentCall(student) {
-        try {
-            console.log('start student')
-            console.log('3', format(this.texts.welcomeAndTypeEnterHour, student.name))
-            await this.send(
-                this.read({ type: 'text', text: format(this.texts.welcomeAndTypeEnterHour, student.name) },
-                    'enterHour', 'tap', { max: 4, min: 4, block_asterisk: true })
-            );
-            console.log('2')
-            await this.send(
-                this.read({ type: 'text', text: this.texts.typeExitHour },
-                    'exitHour', 'tap', { max: 4, min: 4, block_asterisk: true })
-            );
-            console.log('3')
-        } catch (e) {
-            console.log('error in yemot', e)
-        }
+        await this.send(
+            this.read({ type: 'text', text: format(this.texts.welcomeAndTypeEnterHour, student.name) },
+                'enterHour', 'tap', { max: 4, min: 4, block_asterisk: true })
+        );
+        await this.send(
+            this.read({ type: 'text', text: this.texts.typeExitHour },
+                'exitHour', 'tap', { max: 4, min: 4, block_asterisk: true })
+        );
         try {
             if (student.student_type == 1) {
                 await this.handleExercise();
