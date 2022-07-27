@@ -32,7 +32,7 @@ export class YemotCall extends CallBase {
         }
     }
 
-    async handleExercise() {
+    async handleExercise(student) {
         await this.send(
             this.read({ type: 'text', text: this.texts.typeIsAerobic + ', ' + this.texts.typeOneForPositiveZeroForNegative },
                 'isAerobic', 'tap', { max: 1, min: 1, block_asterisk: true })
@@ -63,7 +63,7 @@ export class YemotCall extends CallBase {
         }).save();
     }
 
-    async handleMusic() {
+    async handleMusic(student) {
         await this.send(
             this.read({ type: 'text', text: this.texts.typeHalilit + ', ' + this.texts.typeOneForPositiveZeroForNegative },
                 'halilit', 'tap', { max: 1, min: 1, block_asterisk: true })
@@ -106,9 +106,9 @@ export class YemotCall extends CallBase {
         );
         try {
             if (student.student_type == 1) {
-                await this.handleExercise();
+                await this.handleExercise(student);
             } else if (student.student_type == 2) {
-                await this.handleMusic();
+                await this.handleMusic(student);
             }
 
             await this.send(
