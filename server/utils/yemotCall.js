@@ -10,9 +10,12 @@ export class YemotCall extends CallBase {
     }
 
     async start() {
+        console.log('start')
         await this.getTexts();
+        console.log('got texts')
         try {
             const student = await queryHelper.getStudentByUserIdAndPhone(this.user.id, this.params.ApiPhone);
+            console.log('student', student)
             if (student) {
                 await this.handleStudentCall(student);
             }
@@ -24,6 +27,7 @@ export class YemotCall extends CallBase {
             }
         }
         catch (e) {
+            console.log('in catch')
             if (e) {
                 console.log('catch yemot exception', e);
             }
